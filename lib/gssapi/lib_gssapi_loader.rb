@@ -32,7 +32,7 @@ module GSSAPI
       ffi_lib 'gssapi32'  # Required the MIT Kerberos libraries to be installed
       ffi_convention :stdcall
     else
-      raise LoadError, "This platform (#{RUBY_PLATFORM}) is not supported by ruby gssapi."
+      raise LoadError, "This platform (#{Config::CONFIG['target_os']}) is not supported by ruby gssapi."
     end
 
   end
