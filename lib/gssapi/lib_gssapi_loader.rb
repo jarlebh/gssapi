@@ -5,12 +5,12 @@ Licensed under the MIT License: http://www.opensource.org/licenses/mit-license.p
 =end
 module GSSAPI
   module LibGSSAPI
-
+    require 'rbconfig'
     # Heimdal supported the *_iov functions befor MIT did so in some OS distributions if
     # you need IOV support and MIT does not provide it try the Heimdal libs and then
     # before doing a "require 'gssapi'" do a "require 'gssapi/heimdal'" and that will attempt
     # to load the Heimdal libs
-    case RUBY_PLATFORM
+    case Config::CONFIG['target_os']
     when /linux/
       case GSSAPI_LIB_TYPE
       when :mit
