@@ -24,7 +24,9 @@ module GSSAPI
     # you need IOV support and MIT does not provide it try the Heimdal libs and then
     # before doing a "require 'gssapi'" do a "require 'gssapi/heimdal'" and that will attempt
     # to load the Heimdal libs
-    case RUBY_PLATFORM
+    require 'rbconfig'
+    include Config
+    case CONFIG['host_os']
     when /linux/
       case GSSAPI_LIB_TYPE
       when :mit
@@ -46,7 +48,7 @@ module GSSAPI
       ffi_lib 'gssapi32'  # Required the MIT Kerberos libraries to be installed
       ffi_convention :stdcall
     else
-      raise LoadError, "This platform (#{RUBY_PLATFORM}) is not supported by ruby gssapi."
+      raise LoadError, "This platform (#{CONFIG['host_os']}) is not supported by ruby gssapi."
     end
 
   end
